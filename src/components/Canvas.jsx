@@ -7,6 +7,7 @@ import { createPortal } from "react-dom";
 import getFontSize from "../utils/getFontSize";
 
 export default function Canvas({ start, setStart, choices }) {
+  const [clicks, setClicks] = useState(0);
   const [choice, setChoice] = useState("");
   const canvasRef = useRef(null);
   const [fontSize, setFontSize] = useState(50);
@@ -18,7 +19,20 @@ export default function Canvas({ start, setStart, choices }) {
     .filter((choice) => choice !== "");
   const size = 350;
 
+  useEffect(() => {
+    if (clicks === 0) return;
+
+    const x = setTimeout(() => {
+      setClicks(clicks - 1);
+    }, 1500);
+
+    return () => {
+      clearTimeout(x);
+    };
+  }, [clicks]);
+
   const realSpin = () => {
+    setClicks(0);
     canvasRef.current.classList.remove("fake");
     canvasRef.current.classList.add("real");
     const degree = 360 / choicesArray.length;
@@ -40,7 +54,7 @@ export default function Canvas({ start, setStart, choices }) {
         setTimeout(() => {
           setStart(false);
           setChoice(choicesArray[i]);
-        }, 2500);
+        }, 3000);
       }
     }
   };
@@ -57,10 +71,11 @@ export default function Canvas({ start, setStart, choices }) {
   };
 
   const onClickHandler = () => {
+    setClicks(clicks + 1);
     if (start || choicesArray.length === 0) return;
     const realSpinAudio = new Audio("realSpin.mp3");
     const fakeSpinAudio = new Audio("fakeSpin.mp3");
-    const isStart = Math.ceil(Math.random() * 5) === 5;
+    const isStart = clicks === Math.ceil(Math.random() * 3) + 2;
     canvasRef.current.classList.remove("animate-spin");
 
     if (isStart) {
