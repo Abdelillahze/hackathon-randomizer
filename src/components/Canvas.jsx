@@ -36,7 +36,6 @@ export default function Canvas({ start, setStart, choices }) {
       const minAngle = maxAngle - degree;
       const negAngle = 360 - angle;
 
-      console.log(minAngle, maxAngle, angle, negAngle);
       if (minAngle < negAngle && maxAngle > negAngle) {
         setTimeout(() => {
           setStart(false);
@@ -54,7 +53,6 @@ export default function Canvas({ start, setStart, choices }) {
       parseInt(currentRotation === "none" ? 0 : currentRotation) +
       randomDeg +
       1000;
-    console.log(value);
     canvasRef.current.style.rotate = `${value}deg`;
   };
 
@@ -67,7 +65,6 @@ export default function Canvas({ start, setStart, choices }) {
 
     if (isStart) {
       realSpinAudio.play();
-      console.log("jackpooooot");
       setStart(true);
       realSpin();
     } else {
