@@ -1,13 +1,22 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.animation-duration {
+  animation-duration: 14000ms;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* .spin-animation {
+  animation-name: example;
+  animation-duration: 4s;
+  animation-timing-function: cubic-bezier(0, 1, 0, 0.99);
+  animation-iteration-count: 1;
+} */
+
+.real {
+  transition: rotate 2.5s cubic-bezier(0, 0.75, 0, 1);
+}
+
+.fake {
+  transition: rotate 2s cubic-bezier(0, 0.75, 0, 1);
 }
