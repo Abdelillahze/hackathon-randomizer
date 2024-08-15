@@ -6,6 +6,4 @@ export default function checkChoice(choices, rotation) {
     const maxAngle = (i + 1) * degree;
     return { minAngle: maxAngle - degree, maxAngle: maxAngle, value: choice };
   });
-
-  console.log(choicesAngels);
 }

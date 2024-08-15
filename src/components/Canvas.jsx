@@ -7,6 +7,9 @@ import { createPortal } from "react-dom";
 import getFontSize from "../utils/getFontSize";
 
 export default function Canvas({ start, setStart, choices }) {
+  const randomClicks = useRef(Math.ceil(Math.random() * 3) + 2);
+  const realSpinAudio = new Audio("realSpin.mp3");
+  const fakeSpinAudio = new Audio("fakeSpin.mp3");
   const [clicks, setClicks] = useState(0);
   const [choice, setChoice] = useState("");
   const canvasRef = useRef(null);
@@ -73,9 +76,9 @@ export default function Canvas({ start, setStart, choices }) {
   const onClickHandler = () => {
     setClicks(clicks + 1);
     if (start || choicesArray.length === 0) return;
-    const realSpinAudio = new Audio("realSpin.mp3");
-    const fakeSpinAudio = new Audio("fakeSpin.mp3");
-    const isStart = clicks === Math.ceil(Math.random() * 3) + 2;
+
+    const isStart = clicks === randomClicks.current;
+
     canvasRef.current.classList.remove("animate-spin");
 
     if (isStart) {
